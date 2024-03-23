@@ -7,8 +7,14 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 INCLUDE(GNUInstallDirs)
 
-FILE(GLOB_RECURSE SOURCES src/*)
-FILE(GLOB_RECURSE HEADERS include/*)
+SET(SOURCES
+        src/test.cc
+        src/logger.cc
+)
+
+SET(HEADERS
+        include/wraithworks/test.h
+)
 
 ADD_LIBRARY(
         ${PROJECT_NAME}
