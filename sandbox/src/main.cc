@@ -4,7 +4,8 @@
 
 #include "iostream"
 #define WW_DEBUG
-#include <wraithworks/logger.h>
+#include <embers/logger.h>
+#include <embers/assertions.h>
 
 int main() {
   LOG_FATAL("fatal");
@@ -12,4 +13,6 @@ int main() {
   LOG_WARN("warning %d", 1);
   LOG_INFO("info");
   LOG_DEBUG("debug");
+
+  EMBERS_ASSERT(0 != 0, "0 is equal to 0");
 }

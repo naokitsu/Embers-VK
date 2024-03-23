@@ -2,8 +2,8 @@
 // Created by Naokitsu on 3/23/2024.
 //
 
-#ifndef WRAITHWORKSPROJECT_LOGGER_H
-#define WRAITHWORKSPROJECT_LOGGER_H
+#ifndef EMBERS_LOGGER_H
+#define EMBERS_LOGGER_H
 
 #ifdef WW_DEBUG
 #define LOG_FATAL_ENABLE 1
@@ -19,7 +19,7 @@
 #define LOG_DEBUG_ENABLE 0
 #endif
 
-namespace wraithworks::logger {
+namespace embers::logger {
 
 class LogLevel {
   // https://stackoverflow.com/questions/21295935/can-a-c-enum-class-have-methods
@@ -76,24 +76,24 @@ class LogLevel {
 void log(LogLevel level, const char *message, ...);
 
 #if LOG_FATAL_ENABLE == 1
-#define LOG_FATAL(message, ...) wraithworks::logger::log(wraithworks::logger::LogLevel::FATAL, message, ##__VA_ARGS__)
+#define LOG_FATAL(message, ...) embers::logger::log(embers::logger::LogLevel::FATAL, message, ##__VA_ARGS__)
 #endif
 
 #if LOG_ERROR_ENABLE == 1
-#define LOG_ERROR(message, ...) wraithworks::logger::log(wraithworks::logger::LogLevel::ERROR, message, ##__VA_ARGS__)
+#define LOG_ERROR(message, ...) embers::logger::log(embers::logger::LogLevel::ERROR, message, ##__VA_ARGS__)
 #endif
 
 #if LOG_WARN_ENABLE == 1
-#define LOG_WARN(message, ...) wraithworks::logger::log(wraithworks::logger::LogLevel::WARN, message, ##__VA_ARGS__)
+#define LOG_WARN(message, ...) embers::logger::log(embers::logger::LogLevel::WARN, message, ##__VA_ARGS__)
 #endif
 
 #if LOG_INFO_ENABLE == 1
-#define LOG_INFO(message, ...) wraithworks::logger::log(wraithworks::logger::LogLevel::INFO, message, ##__VA_ARGS__)
+#define LOG_INFO(message, ...) embers::logger::log(embers::logger::LogLevel::INFO, message, ##__VA_ARGS__)
 #endif
 
 #if LOG_DEBUG_ENABLE == 1
-#define LOG_DEBUG(message, ...) wraithworks::logger::log(wraithworks::logger::LogLevel::DEBUG, message, ##__VA_ARGS__)
+#define LOG_DEBUG(message, ...) embers::logger::log(embers::logger::LogLevel::DEBUG, message, ##__VA_ARGS__)
 #endif
-} // wraithworks::logger
+} // embers::logger
 
-#endif //WRAITHWORKSPROJECT_LOGGER_H
+#endif //EMBERS_LOGGER_H

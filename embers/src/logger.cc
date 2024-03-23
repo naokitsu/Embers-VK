@@ -4,9 +4,9 @@
 
 #include <cstdarg>
 #include <cstdio>
-#include "wraithworks/logger.h"
+#include "embers/logger.h"
 
-namespace wraithworks::logger {
+namespace embers::logger {
 void log(LogLevel level, const char *message, ...) {
   char buffer[1024];
   va_list args;
@@ -17,4 +17,4 @@ void log(LogLevel level, const char *message, ...) {
   printf("[%s%s\033[0m] %s\n", level.AnsiColor() ,level.ToString(), buffer);
 }
 
-} // wraithworks
+} // embers

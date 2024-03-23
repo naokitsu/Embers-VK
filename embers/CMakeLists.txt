@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.23)
 ###
-PROJECT(wraithworks VERSION 0.0.1 LANGUAGES CXX)
+PROJECT(embers VERSION 0.0.1 LANGUAGES CXX)
 SET(CMAKE_CXX_STANDARD 20)
 SET(CMAKE_C_VISIBILITY_PRESET hidden)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
@@ -10,10 +10,11 @@ INCLUDE(GNUInstallDirs)
 SET(SOURCES
         src/test.cc
         src/logger.cc
+        src/assertions.cc
 )
 
 SET(HEADERS
-        include/wraithworks/test.h
+        include/embers/test.h
 )
 
 ADD_LIBRARY(
