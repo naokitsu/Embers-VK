@@ -6,6 +6,19 @@
 #define WW_DEBUG
 #include <embers/logger.h>
 #include <embers/assertions.h>
+#include <embers/application.h>
+
+class Sandbox : public embers::Application {
+public:
+    Sandbox() = default;
+    ~Sandbox() override = default;
+
+    void Run() override {
+        while (true) {
+          LOG_DEBUG("tick");
+        }
+    }
+};
 
 int main() {
   LOG_FATAL("fatal");
@@ -14,5 +27,9 @@ int main() {
   LOG_INFO("info");
   LOG_DEBUG("debug");
 
-  EMBERS_ASSERT(0 != 0, "0 is equal to 0");
+  //EMBERS_ASSERT(0 != 0, "0 is equal to 0");
+
+  Sandbox sandbox;
+  sandbox.Run();
+
 }

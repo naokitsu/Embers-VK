@@ -2,8 +2,8 @@
 // Created by Naokitsu on 3/23/2024.
 //
 
-#ifndef EMBERS_DATATYPES_H
-#define EMBERS_DATATYPES_H
+#ifndef EMBERS_PRIMITIVES_H
+#define EMBERS_PRIMITIVES_H
 
 #include <cstdint>
 
@@ -33,4 +33,4 @@ static_assert(sizeof(u64) == 8, "u64 must be 8 bytes");
 static_assert(sizeof(f32) == 4, "f32 must be 4 bytes");
 static_assert(sizeof(f64) == 8, "f64 must be 8 bytes");
 
-#endif //EMBERS_DATATYPES_H
+#endif //EMBERS_PRIMITIVES_H
