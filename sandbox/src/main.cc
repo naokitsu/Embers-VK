@@ -14,10 +14,12 @@
 
 class Sandbox : public embers::Application {
   embers::window::Window window_;
+  embers::window::Window window2_;
 public:
     Sandbox()
     : embers::Application()
-    , window_(*this, 100, 100,  600, 400)
+        , window_(*this, 100, 100,  600, 400, "Sandbox 1", "sandbox1")
+        , window2_(*this, 500, 500,  600, 400, "Sandbox 2", "sandbox2")
     {
       name_ = "Sandbox"; // It shall be 'static, so outlive anyway
       hinstance_ = GetModuleHandle(NULL);
@@ -26,8 +28,8 @@ public:
 
     void Run() override {
         while (true) {
-          EMBERS_LOG_DEBUG("tick by %s", this->name_);
           window_.Update();
+          window2_.Update();
         }
     }
 };

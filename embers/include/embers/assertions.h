@@ -18,19 +18,19 @@
 
 namespace embers {
 
-void processFailedAssertion(const char *file, int line, const char *expr, const char *message);
+void processFailedAssertion(const char *file, int line, const char *expr, const char *message, ...);
 void processFailedAssertion(const char *file, int line, const char *expr);
 
 }
 
 #define __EMBERS_ASSERT_GET_MACRO(_1,_2,NAME,...) NAME
-#define EMBERS_ASSERT(...) __EMBERS_ASSERT_GET_MACRO(__VA_ARGS__, __EMBERS_ASSERT_WITH_MSG, __EMBERS_ASSERT_WITHOUT_MSG)(__VA_ARGS__)
+#define EMBERS_ASSERT(...) __EMBERS_ASSERT_GET_MACRO(__VA_ARGS__, EMBERS_ASSERT_MSG, __EMBERS_ASSERT_WITHOUT_MSG)(__VA_ARGS__)
 
-#define __EMBERS_ASSERT_WITH_MSG(x, msg) \
+#define EMBERS_ASSERT_MSG(x, msg, ...) \
 {                             \
   if (!(x)) { \
-    embers::processFailedAssertion(__FILE__, __LINE__, #x, msg); \
-    __DBG_BREAK();              \
+    embers::processFailedAssertion(__FILE__, __LINE__, #x, msg, __VA_ARGS__); \
+    __DBG_BREAK();             \
   }                            \
 }
 

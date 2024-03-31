@@ -13,7 +13,14 @@ LRESULT CALLBACK win32_process_message(HWND hwnd, UINT msg, WPARAM w_param, LPAR
   return DefWindowProcA(hwnd, msg, w_param, l_param);
 }
 
-embers::window::Window::Window(const Application &application, u32 x, u32 y, u32 width, u32 height) {
+embers::window::Window::Window(const Application &application, u32 x, u32 y, u32 width, u32 height, const char *window_name, const char *class_name) {
+  if (window_name == nullptr) {
+      window_name = application.name_; // should outlive application
+  }
+
+  if (class_name == nullptr) {
+      class_name = "EmbersWindow";
+  }
 
   icon_ = LoadIcon(application.hinstance_, IDI_APPLICATION);
 
@@ -27,9 +34,10 @@ embers::window::Window::Window(const Application &application, u32 x, u32 y, u32
   window_class.hIcon = icon_;
   window_class.hCursor = LoadCursor(NULL, IDC_ARROW);
   window_class.hbrBackground = NULL;
-  window_class.lpszClassName = "embers_window";
+  window_class.lpszClassName = class_name;
 
-  RegisterClassA(&window_class);
+  auto register_result = RegisterClassA(&window_class);
+  EMBERS_ASSERT_MSG(register_result != 0, "Failed to register window class: %d", GetLastError());
 
   UINT window_style = WS_OVERLAPPEDWINDOW;
   UINT window_ex_style = WS_EX_APPWINDOW;
@@ -44,8 +52,8 @@ embers::window::Window::Window(const Application &application, u32 x, u32 y, u32
 
   window_ = CreateWindowExA(
       window_ex_style,
-      "embers_window",
-      application.name_,
+      class_name,
+      window_name,
       window_style,
       x_,
       y_,
@@ -57,15 +65,16 @@ embers::window::Window::Window(const Application &application, u32 x, u32 y, u32
       NULL
   );
 
-  if (window_ == NULL) {
-    EMBERS_LOG_ERROR("Failed to create window: %d", GetLastError());
-    exit(1);
-  }
+  EMBERS_ASSERT_MSG(window_ != NULL, "Failed to create window: %d", GetLastError());
 
   ShowWindow(window_, SW_SHOW);
-
 }
 
-void embers::window::Window::Update() {
-  UpdateWindow(window_);
+embers::window::Window::~Window() {
+  auto result = DestroyWindow(window_);
+  EMBERS_ASSERT_MSG(result, "Failed to destroy window: %d", GetLastError());
+}
+
+bool embers::window::Window::Update() {
+  return UpdateWindow(window_);
 }

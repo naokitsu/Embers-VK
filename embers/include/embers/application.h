@@ -6,6 +6,7 @@
 #define EMBERS_APPLICATION_H_
 
 #include <windows.h>
+#include "embers/assertions.h"
 
 // Cherno, Ozzadar and Travis Vroman prefer define main function in the entry.h (or similar file)
 // Probably they know it better, but I'm not a fan of this approach
@@ -25,6 +26,7 @@ class Application {
  public:
   Application() {
     hinstance_ = GetModuleHandleA(NULL);
+    EMBERS_ASSERT_MSG(hinstance_ != NULL, "Failed to get module handle inside application: 0x%x", GetLastError());
   }
   virtual ~Application() = default;
 

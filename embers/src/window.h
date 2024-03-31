@@ -26,9 +26,9 @@ class Window {
   u32 height_;
 
  public:
-  Window(const Application &application, u32 x, u32 y, u32 width, u32 height);
-
-  void Update();
+  Window(const Application &application, u32 x, u32 y, u32 width, u32 height, const char *window_name = nullptr, const char *class_name = nullptr);
+  ~Window();
+  bool Update();
 };
 }
 
