@@ -11,6 +11,8 @@ SET(SOURCES
         src/test.cc
         src/logger.cc
         src/assertions.cc
+        src/window.cc
+        src/application.cc
 )
 
 SET(HEADERS
