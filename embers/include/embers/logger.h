@@ -79,22 +79,32 @@ void log(LogLevel level, const char *message, ...);
 
 #if EMBERS_LOG_FATAL_ENABLE == 1
 #define EMBERS_LOG_FATAL(message, ...) embers::logger::log(embers::logger::LogLevel::kLogLevelFatal, message, ##__VA_ARGS__)
+#else
+#define EMBERS_LOG_FATAL(message, ...) {}
 #endif
 
 #if EMBERS_LOG_ERROR_ENABLE == 1
 #define EMBERS_LOG_ERROR(message, ...) embers::logger::log(embers::logger::LogLevel::kLogLevelError, message, ##__VA_ARGS__)
+#else
+#define EMBERS_LOG_ERROR(message, ...) {}
 #endif
 
 #if EMBERS_LOG_WARN_ENABLE == 1
 #define EMBERS_LOG_WARN(message, ...) embers::logger::log(embers::logger::LogLevel::kLogLevelWarn, message, ##__VA_ARGS__)
+#else
+#define EMBERS_LOG_WARN(message, ...) {}
 #endif
 
 #if EMBERS_LOG_INFO_ENABLE == 1
 #define EMBERS_LOG_INFO(message, ...) embers::logger::log(embers::logger::LogLevel::kLogLevelInfo, message, ##__VA_ARGS__)
+#else
+#define EMBERS_LOG_INFO(message, ...) {}
 #endif
 
 #if EMBERS_LOG_DEBUG_ENABLE == 1
 #define EMBERS_LOG_DEBUG(message, ...) embers::logger::log(embers::logger::LogLevel::kLogLevelDebug, message, ##__VA_ARGS__)
+#else
+#define EMBERS_LOG_DEBUG(message, ...) {}
 #endif
 } // embers::logger
 
