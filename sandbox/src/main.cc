@@ -3,33 +3,32 @@
 //
 
 #include "iostream"
-#include "../../embers/src/window.h"
-
-#include <windows.h>
+#include "embers/window.h"
 
 #define EMBERS_ENABLE_DEBUG
 #include <embers/logger.h>
 #include <embers/assertions.h>
 #include <embers/application.h>
 
-class Sandbox : public embers::Application {
-  embers::window::Window window_;
-  embers::window::Window window2_;
+class Sandbox : public embers::application::Application {
+  std::unique_ptr<embers::window::Window> window_;
+  std::unique_ptr<embers::window::Window> window2_;
 public:
-    Sandbox()
-    : embers::Application()
-        , window_(*this, 100, 100,  600, 400, "Sandbox 1", "sandbox1")
-        , window2_(*this, 500, 500,  600, 400, "Sandbox 2", "sandbox2")
-    {
+    Sandbox() : embers::application::Application() {
+        auto builder = embers::window::Window::Builder()
+                .Name("Sandbox")
+                .Location(200,200);
+
+        window_ = builder.Build(*this);
+        window2_ = builder.Build(*this);
       name_ = "Sandbox"; // It shall be 'static, so outlive anyway
-      hinstance_ = GetModuleHandle(NULL);
     };
     ~Sandbox() override = default;
 
     void Run() override {
         while (true) {
-          window_.Update();
-          window2_.Update();
+          window_->Update();
+          window2_->Update();
         }
     }
 };
@@ -40,3 +39,27 @@ int main() {
   app.Run();
   return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

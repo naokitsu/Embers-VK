@@ -5,30 +5,27 @@
 #ifndef EMBERS_APPLICATION_H_
 #define EMBERS_APPLICATION_H_
 
-#include <windows.h>
+#include "platform_detection.h"
 #include "embers/assertions.h"
 
 // Cherno, Ozzadar and Travis Vroman prefer define main function in the entry.h (or similar file)
 // Probably they know it better, but I'm not a fan of this approach
 // Going to try to make it the way i prefer until fail :lul:
-
 namespace embers::window { class Window; }
 
-
-namespace embers {
-
-
-
+namespace embers::application {
 class Application {
  protected:
-  HINSTANCE hinstance_;
-  const char *name_ = "Embers Application";
- public:
-  Application() {
-    hinstance_ = GetModuleHandleA(NULL);
-    EMBERS_ASSERT_MSG(hinstance_ != NULL, "Failed to get module handle inside application: 0x%x", GetLastError());
-  }
-  virtual ~Application() = default;
+  const char *name_ = "Embers Application"; /// Does not take ownership, make sure it outlives the class
+  bool valid;
+public:
+  Application();
+  virtual ~Application();
+  Application(const Application &) = delete;
+  Application(Application &&other) noexcept;
+
+    Application &operator=(const Application &) = delete;
+    Application &operator=(Application &&other) noexcept;
 
   virtual void Run() = 0;
 
