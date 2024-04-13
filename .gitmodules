@@ -1,0 +1,6 @@
+[submodule "embers/external/glm"]
+	path = embers/external/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "embers/external/glfw"]
+	path = embers/external/glfw
+	url = https://github.com/glfw/glfw.git

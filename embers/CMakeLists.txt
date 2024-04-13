@@ -19,6 +19,9 @@ SET(HEADERS
         include/embers/test.h
 )
 
+add_subdirectory(external/glfw)
+add_subdirectory(external/glm)
+
 ADD_LIBRARY(
         ${PROJECT_NAME}
         SHARED
@@ -28,15 +31,20 @@ ADD_LIBRARY(
 TARGET_INCLUDE_DIRECTORIES(
         ${PROJECT_NAME}
         PUBLIC
+        glm
+        glfw
         $<INSTALL_INTERFACE:include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         PRIVATE
+
 )
 
 TARGET_LINK_LIBRARIES(
         ${PROJECT_NAME}
         PUBLIC
-
+        glm
+        glfw
         PRIVATE
+
 )
 
